@@ -1,0 +1,21 @@
+WHITESPACE = _{ " " }
+
+description = @{"Strategy report"}
+ticker = { ASCII_ALPHA_UPPER+ }
+symbol = { "Symbol:" ~ ticker }
+
+dmy = { ASCII_DIGIT{1,2} }
+date = { dmy ~ "/" ~ dmy ~ "/" ~ dmy }
+work_time = { "Work Time:" ~ date ~ "-" ~ date }
+
+header = { description ~ NEWLINE ~ symbol ~ NEWLINE ~ work_time ~ NEWLINE+ }
+// footer = {}
+// column = {ANY+}
+// columns = {(column ~ (sep ~ column)*) | (column ~ (sep ))}
+// data = {}
+sep = @{";"}
+
+file = {
+	SOI ~
+	(header)
+}
